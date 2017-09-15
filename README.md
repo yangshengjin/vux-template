@@ -1,6 +1,6 @@
-# pangudangjian
+# Vue project
 
-> A Vue.js project
+> A Vue.js and Vux project
 
 ## Build Setup
 
