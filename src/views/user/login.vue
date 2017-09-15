@@ -1,11 +1,11 @@
 <template>
 	<div>
 		<div class="page-wrap">
-      <h2 style="text-align: center;padding-top: 10px">盘古党建App</h2>
+      <h2 style="text-align: center;padding-top: 10px">logo</h2>
 			<group>
 				<x-input v-model="model.loginId" title="账号" placeholder="请输入账号" :max="11"></x-input>
 				<x-input v-model="model.password" type="password" title="密码" placeholder="请输入密码"></x-input>
-        <x-input title="验证码" class="weui-cell_vcode">
+        <x-input title="验证码">
           <img slot="right" class="weui-vcode-img" src="http://weui.github.io/weui/images/vcode.jpg">
         </x-input>
 			</group>
