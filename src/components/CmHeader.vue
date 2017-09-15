@@ -6,19 +6,15 @@
   		@on-click-back="onClickBack">
   		{{title}}
   	</x-header>
-    <loading v-model="loading" :text="'正在加载'"></loading>
-    <toast v-model="showQuit" :time="time" width="9.6em" type="text" text="再按一次退出系统"></toast>
   </div>
 
 </template>
 
 <script>
-  import { XHeader, Toast, Loading } from 'vux'
+  import { XHeader } from 'vux'
   export default {
     components: {
-      XHeader,
-      Toast,
-      Loading
+      XHeader
     },
     name: 'cm-header',
     data () {
@@ -40,6 +36,13 @@
     },
     computed: {
       title () {
+        // this.Listener()
+        return this.$store.state.comm.indexConf.title
+      },
+      isBack () {
+        return this.$store.state.comm.indexConf.isBack
+      },
+      Listener () {
         // 监听返回按钮
         let i = 0
         const $this = this
@@ -51,40 +54,33 @@
               plus.runtime.quit()
               return
             }
-            if ($this.$route.path === '/home' || $this.$route.path === '/steward' || $this.$route.path === '/user') {
+            if ($this.$route.path === '/page1' || $this.$route.path === '/page2' || $this.$route.path === '/user') {
               i++
               if (i >= 2) {
                 plus.runtime.quit()
               } else {
-                $this.showQuit = true
+                $this.showToast('再按一次退出系统', $this.time)
                 setTimeout(() => {
                   i = 0
                 }, 2000)
               }
             } else {
-              $this.$router.go(-1)
+              $this.goBack()
             }
           }
         }, 500)
-        return this.$store.state.comm.indexConf.title
-      },
-      isBack () {
-        return this.$store.state.comm.indexConf.isBack
-      },
-      loading () {
-        return this.$store.state.comm.loading
       }
     },
     created () {
       // 调用native api
-      const plusReady = function () {
-        window.plus = window.plus
-      }
-      if (window.plus) {
-        plusReady(this)
-      } else {
-        document.addEventListener('plusready', plusReady, false)
-      }
+      // const plusReady = function () {
+      //   window.plus = window.plus
+      // }
+      // if (window.plus) {
+      //   plusReady(this)
+      // } else {
+      //   document.addEventListener('plusready', plusReady, false)
+      // }
     }
   }
 </script>

@@ -57,11 +57,18 @@ export default {
         this.PostLogin(this.model).then(res => {
           this.showToast(`${res.desc}`)
           if (res.status === 1) {
-            this.$router.push('/')
+            const path = this.$route.query.redirect
+            if (path !== undefined) {
+              this.$router.replace({path: path})
+            } else {
+              this.goBack()
+            }
           }
         })
       }
     }
+  },
+  created () {
   }
 }
 </script>
