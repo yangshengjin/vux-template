@@ -1,7 +1,11 @@
 <template>
   <div id="app">
-    <view-box ref="viewBox" :body-padding-top="title ? '46px' : 0" body-padding-bottom="55px">
-	    <cm-header slot="header" :left-options="{showBack: true}"></cm-header>
+    <div v-transfer-dom>
+      <loading v-model="isLoading" :text="'正在加载'"></loading>
+    </div> 
+
+    <view-box ref="viewBox" body-padding-top="0" body-padding-bottom="55px" style="width:100%;height:100%;">
+	    <cm-header></cm-header>
 	    <transition :name="'vux-pop-' + (direction === 'forward' ? 'in' : 'out')">
 	      <router-view class="router-view" slot="default"></router-view>
 	    </transition>
@@ -11,13 +15,17 @@
 
 <script>
 import CmHeader from '@/components/CmHeader'
-import { LoadMore, ViewBox } from 'vux'
+import { LoadMore, ViewBox, Loading, TransferDom } from 'vux'
 export default {
   name: 'app',
+  directives: {
+    TransferDom
+  },
   components: {
     CmHeader,
     LoadMore,
-    ViewBox
+    ViewBox,
+    Loading
   },
   computed: {
     direction () {
@@ -25,6 +33,9 @@ export default {
     },
     title () {
       return this.$store.state.comm.indexConf.title
+    },
+    isLoading () {
+      return this.$store.state.comm.isLoading
     }
   },
   watch: {
@@ -35,19 +46,20 @@ export default {
   created () {
     let uid = localStorage.getItem('uid')
     if (uid === '' || uid == null || uid === undefined) {
-      this.$router.push('/user/login')
+      // 判断有无登录，无则跳转到登录
+      // this.$router.push('/user/login')
     } else {
       this.$store.state.responseData['UserInfo'].uid = uid
     }
     // 调用native api
-    const plusReady = res => {
-      plus.navigator.setStatusBarBackground('#26A2FF')
-    }
-    if (window.plus) {
-      plusReady(this)
-    } else {
-      document.addEventListener('plusready', plusReady, false)
-    }
+    // const plusReady = res => {
+    //   plus.navigator.setStatusBarBackground('#26A2FF')
+    // }
+    // if (window.plus) {
+    //   plusReady(this)
+    // } else {
+    //   document.addEventListener('plusready', plusReady, false)
+    // }
   }
 }
 </script>

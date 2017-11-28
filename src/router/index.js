@@ -7,12 +7,8 @@ import Tabs from '@/components/Tabs.vue'
 const Login = resolve => require(['../views/user/login.vue'], resolve)
 // 注册
 const Register = resolve => require(['../views/user/register.vue'], resolve)
-const Information = resolve => require(['../views/information.vue'], resolve)
-const InformationDetail = resolve => require(['../views/information/detail.vue'], resolve)
-const School = resolve => require(['../views/school.vue'], resolve)
-const VideoDetail = resolve => require(['../views/school/videoDetail.vue'], resolve)
-const Interaction = resolve => require(['../views/interaction.vue'], resolve)
-const Workbench = resolve => require(['../views/workbench.vue'], resolve)
+const page1 = resolve => require(['../views/page1.vue'], resolve)
+const page2 = resolve => require(['../views/page2.vue'], resolve)
 const User = resolve => require(['../views/user.vue'], resolve)
 
 // 个人中心
@@ -31,70 +27,30 @@ const router = new Router({
       component: Tabs,
       children: [
         {
-          path: '/information',
-          component: Information,
+          path: '/page1',
+          component: page1,
           meta: {
-            title: false,
-            isBack: true,
-            isToken: true,
-            mask: '资讯'
+            title: 'page1',
+            isBack: false,
+            isToken: false,
+            mask: 'page1'
           }
         },
         {
-          path: '/informationDetail/:id',
-          component: InformationDetail,
+          path: '/page2',
+          component: page2,
           meta: {
-            title: false,
-            isBack: true,
-            isToken: true,
-            mask: '资讯'
-          }
-        },
-        {
-          path: '/school',
-          component: School,
-          meta: {
-            title: false,
-            isBack: true,
-            isToken: true,
-            mask: '党校'
-          }
-        },
-        {
-          path: '/videoDetail/:id',
-          component: VideoDetail,
-          meta: {
-            title: false,
-            isBack: true,
-            isToken: true,
-            mask: '详情'
-          }
-        },
-        {
-          path: '/interaction',
-          component: Interaction,
-          meta: {
-            title: false,
-            isBack: true,
-            isToken: true,
-            mask: '互动'
-          }
-        },
-        {
-          path: '/workbench',
-          component: Workbench,
-          meta: {
-            title: false,
-            isBack: true,
-            isToken: true,
-            mask: '工作台'
+            title: 'page2',
+            isBack: false,
+            isToken: false,
+            mask: 'page2'
           }
         },
         {
           path: '/user',
           component: User,
           meta: {
-            title: false,
+            title: '个人中心',
             isBack: true,
             isToken: true,
             mask: '我'
@@ -141,15 +97,19 @@ router.beforeEach((to, from, next) => {
   // 判断有无登录
   let uid = localStorage.getItem('uid')
   if (uid) {
-    if (to.path === '/') {
-      next('/information')
+    if (to.path === '/' || to.path === '/user/login') {
+      next('/page1')
     } else {
       next()
     }
     // 如果有token就正常转向
   } else {
     if (to.meta.isToken) {
-      next('/user/login') // 否则如果该页面需要Token则跳转回登录页
+      next('/user/login?redirect=' + to.path) // 否则如果该页面需要Token则跳转回登录页
+    } else if (to.path === '/') {
+      next('/page1')
+    } else {
+      next()
     }
   }
 

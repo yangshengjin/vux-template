@@ -2,21 +2,13 @@
   <div class="page-tabs">
   	<div class="m-tabs-wrap">
 	    <Tabbar :animate="false" :lineWidth = "0">
-	      <tabbar-item :selected="selected === 'information'" @click.native="channgeTab('information')">
+	      <tabbar-item :selected="selected === 'page1'" @click.native="channgeTab('page1')">
           <img slot="icon" src="../assets/icon-information.png">
-          <span slot="label">资讯</span>
+          <span slot="label">page1</span>
         </tabbar-item>
-	      <tabbar-item :selected="selected === 'school'" @click.native="channgeTab('school')">
-          <img slot="icon" src="../assets/icon-school.png">
-          <span slot="label">党校</span>
-        </tabbar-item>
-	      <tabbar-item :selected="selected === 'interaction'" @click.native="channgeTab('interaction')">
+	      <tabbar-item :selected="selected === 'page2'" @click.native="channgeTab('page2')">
           <img slot="icon" src="../assets/icon-interaction.png">
-          <span slot="label">互动</span>
-        </tabbar-item>
-	      <tabbar-item :selected="selected === 'workbench'" @click.native="channgeTab('workbench')">
-          <img slot="icon" src="../assets/icon-workbench.png">
-          <span slot="label">工作台</span>
+          <span slot="label">page2</span>
         </tabbar-item>
 	      <tabbar-item :selected="selected === 'user'" @click.native="channgeTab('user')">
           <img slot="icon" src="../assets/icon-user.png">
@@ -38,17 +30,13 @@
     methods: {
       channgeTab (tab) {
         switch (tab) {
-          case 'information': this.$router.push('/information')
+          case 'page1': this.$router.push('/page1')
             break
-          case 'school': this.$router.push('/school')
-            break
-          case 'interaction': this.$router.push('/interaction')
-            break
-          case 'workbench': this.$router.push('/workbench')
+          case 'page2': this.$router.push('/page2')
             break
           case 'user': this.$router.push('/user')
             break
-          default: this.$router.push('/information')
+          default: this.$router.push('/page1')
             break
         }
       }

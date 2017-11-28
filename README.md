@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 # A vux template
+=======
+# Vue project
+>>>>>>> 278597b4b3fefa5d804032f0cf0e50e412590cf4
 
-> A Vue.js project
+> A Vue.js and Vux project
 
 ## Build Setup
 

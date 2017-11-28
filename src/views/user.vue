@@ -33,12 +33,5 @@ export default {
 </script>
 
 <style lang="less">
-.u-fild {
-	padding: 15px 0;
-	text-align: center;
-	a {
-		margin: 0 15px;
-		color: #aaa;
-	}
-}
+
 </style>
