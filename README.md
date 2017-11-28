@@ -1,4 +1,4 @@
-# pangudangjian
+# A vux template
 
 > A Vue.js project
 
@@ -31,6 +31,7 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
   5. vscode-icons
 - 工具教程用法链接 [https://www.qcloud.com/community/article/983896](https://www.qcloud.com/community/article/983896)
 
+// app 打包工具
 > Hbuilder 版本
 - version: 8.0.2.201703061842
 
